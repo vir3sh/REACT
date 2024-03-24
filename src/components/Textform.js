@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import PropTypes from "prop-types";
 
 export default function Textform(props) {
-  const [text, setText] = useState("enter text here");
+  const [text, setText] = useState("  ");
 
   const uppercase = () => {
     console.log("uppercase clicked" + text);
@@ -65,7 +65,7 @@ export default function Textform(props) {
           <button type="button" className="btn btn-primary" onClick={clear}>
             clear
           </button>
-          <button type="button" className="btn btn-primary" onClick={copy}>
+          <button type="button" className="btn btn-primary mx-2" onClick={copy}>
             copy
           </button>
           <button
