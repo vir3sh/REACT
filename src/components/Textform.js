@@ -1,0 +1,88 @@
+import React, { useState } from "react";
+// import PropTypes from "prop-types";
+
+export default function Textform(props) {
+  const [text, setText] = useState("enter text here");
+
+  const uppercase = () => {
+    console.log("uppercase clicked" + text);
+    let tt = text.toUpperCase();
+    setText(tt);
+  };
+  const copy = () => {
+    let text = document.getElementById("exampleFormControlTextarea1");
+    // text.select();
+    navigator.clipboard.writeText(text.value);
+  };
+  const lower = () => {
+    console.log("lower clicked" + text);
+    let tt = text.toLowerCase();
+    setText(tt);
+  };
+  // const dark = () => {
+  //   console.log("drak mode enabled");
+  // };
+
+  const clear = () => {
+    console.log("uppercase clicked" + text);
+    // let tt = text.toUpperCase();
+    setText("");
+  };
+
+  const handleonchange = (event) => {
+    console.log("handleonchange");
+    setText(event.target.value);
+  };
+
+  return (
+    <>
+      <div
+        className="container"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
+        <div className="mb-3 ">
+          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+            <h1>Example textarea</h1>
+          </label>
+          <textarea
+            className="form-control "
+            id="exampleFormControlTextarea1"
+            rows="8"
+            value={text}
+            onChange={handleonchange}
+            style={{
+              backgroundColor: props.mode === "dark" ? "grey" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
+          ></textarea>
+          <button
+            type="button"
+            className="btn mx-2 btn-primary"
+            onClick={uppercase}
+          >
+            upper case
+          </button>
+          <button type="button" className="btn btn-primary" onClick={clear}>
+            clear
+          </button>
+          <button type="button" className="btn btn-primary" onClick={copy}>
+            copy
+          </button>
+          <button
+            type="button"
+            className="btn mx-2 btn-primary"
+            onClick={lower}
+          >
+            lower case
+          </button>
+        </div>
+        <h3>{props.sum}</h3>
+        <p>
+          {text.split(" ").length - 1} words ,{text.length} letter
+        </p>
+        <h3>Preview</h3>
+        <p>{text.length > 0 ? text : "enter something to preview"}</p>
+      </div>
+    </>
+  );
+}
