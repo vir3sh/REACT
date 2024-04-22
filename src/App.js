@@ -2,19 +2,34 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Textform from "./components/Textform";
 import React, { useState } from "react";
+import Alert from "./components/Alert";
 
 // import About from "./components/About";
 
 function App() {
-  let [mode, setMode] = useState("white");
+  const [mode, setMode] = useState("white");
+
+  const [alert,setAlert]=useState(null);
+
+  const showAlert=(message,type)=>{
+    setAlert({
+      msg:message,
+      type:type
+    })
+    setTimeout(() => {
+      setAlert(null)
+    }, 800);
+  }
 
   let toggleMode = () => {
     if (mode === "white") {
       setMode("dark");
       document.body.style.backgroundColor = "grey";
+      showAlert("dark mode activated ","success")
     } else {
       setMode("white");
       document.body.style.backgroundColor = "white";
+      showAlert("light mode activated " ,"success")
     }
   };
 
@@ -31,7 +46,9 @@ function App() {
         sum="Summary"
         mode={mode}
         toggleMode={toggleMode}
+        showAlert={showAlert}
       />
+      <Alert alert={alert}/>
     </>
   );
 }

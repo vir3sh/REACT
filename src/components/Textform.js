@@ -8,16 +8,19 @@ export default function Textform(props) {
     console.log("uppercase clicked" + text);
     let tt = text.toUpperCase();
     setText(tt);
+    props.showAlert("converted to uppercase","success")
   };
   const copy = () => {
     let text = document.getElementById("exampleFormControlTextarea1");
     // text.select();
     navigator.clipboard.writeText(text.value);
+    props.showAlert("copied","success")
   };
   const lower = () => {
     console.log("lower clicked" + text);
     let tt = text.toLowerCase();
     setText(tt);
+    props.showAlert("converted to lowercase","success")
   };
   // const dark = () => {
   //   console.log("drak mode enabled");
@@ -27,6 +30,9 @@ export default function Textform(props) {
     console.log("uppercase clicked" + text);
     // let tt = text.toUpperCase();
     setText("");
+    props.showAlert("cleared","success")
+    
+    
   };
 
   const handleonchange = (event) => {
@@ -65,7 +71,7 @@ export default function Textform(props) {
           <button type="button" className="btn btn-primary" onClick={clear}>
             clear
           </button>
-          <button type="button" className="btn btn-primary mx-2" onClick={copy}>
+          <button type="button" className="btn btn-primary mx-2 my-2" onClick={copy}>
             copy
           </button>
           <button
@@ -78,7 +84,7 @@ export default function Textform(props) {
         </div>
         <h3>{props.sum}</h3>
         <p>
-          {text.split(" ").length - 1} words ,{text.length} letter
+          {text.split(/\s+/).filter((element)=>{return element.length!==0}).length } words ,{text.length} letter
         </p>
         <h3>Preview</h3>
         <p>{text.length > 0 ? text : "enter something to preview"}</p>
